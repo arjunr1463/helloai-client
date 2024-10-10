@@ -30,13 +30,26 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
-        <GoogleLogin
-          onSuccess={handleLogin}
-          onError={() => toast.error("login failed! Something went wrong")}
-        />
-      </GoogleOAuthProvider>
+    <div className="bg-[#171717] text-white h-screen flex flex-col gap-6 items-center justify-center">
+      <div className="flex flex-col text-center">
+        <h1 className="text-[55px] font-monasansSemibold tracking-wider">
+          Empowering Education with AI
+        </h1>
+        <h1 className="font-monasans tracking-wide">
+          Revolutionize learning and discovery with CollegeGPT, your intelligent
+          companion for academic exploration.
+        </h1>
+      </div>
+      <div>
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        >
+          <GoogleLogin
+            onSuccess={handleLogin}
+            onError={() => toast.error("login failed! Something went wrong")}
+          />
+        </GoogleOAuthProvider>
+      </div>
     </div>
   );
 };

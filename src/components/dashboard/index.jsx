@@ -21,7 +21,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="bg-[#23262f] overflow-hidden h-screen px-[15px] py-[25px] text-white">
+    <div className="bg-[#171717] overflow-hidden h-screen px-[15px] py-[25px] text-white">
       <div className="border-[1px] border-[white] min-h-[40%] max-h-[40%]"></div>
       <div className="border-[1px] border-[white] min-h-[60%] max-h-[60%]">
         <div>

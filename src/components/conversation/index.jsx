@@ -3,7 +3,7 @@
 // module
 import useSWR, { mutate } from "swr";
 import { useEffect, useState, useRef } from "react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 // shared
 import LayoutE1 from "@/shared/layout";
@@ -95,8 +95,6 @@ const Conversation = () => {
     }
   }, [animatedResponse]);
 
-  console.log("data",data)
-
   return (
     <LayoutE1>
       <div
@@ -165,7 +163,7 @@ const Conversation = () => {
                 className="max-h-[35px] min-h-[35px] min-w-[35px] max-w-[35px]"
               />
               <span className="leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-3 rounded-[8px]">
-                {animatedResponse}
+                <ReactMarkdown>{animatedResponse}</ReactMarkdown>
               </span>
             </div>
           </div>
