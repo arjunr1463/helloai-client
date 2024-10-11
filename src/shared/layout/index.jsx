@@ -2,7 +2,7 @@
 
 //module
 import { Dropdown, Layout } from "antd";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -23,6 +23,7 @@ const LayoutE1 = ({ children }) => {
   const { Header, Sider, Content, Footer } = Layout;
   const router = useRouter();
   const [selectedSubject, setSelectedSubject] = useState("");
+  const [fetchData, setFetchData] = useState(false);
 
   //service
   const { getUserService } = UserService();
@@ -35,6 +36,13 @@ const LayoutE1 = ({ children }) => {
     setSelectedSubject(Cookies.get("subject"));
   }, []);
 
+  useEffect(() => {
+    if (fetchData) {
+      mutate("/v1/chat/all");
+      setFetchData(false);
+    }
+  }, [fetchData]);
+
   return (
     <Layout className="h-screen w-full font-monasans">
       <Sider className="!bg-[#232323] hidden xl:!flex !p-0 !m-0 !min-w-[250px] max-w-[250px]">
@@ -43,7 +51,7 @@ const LayoutE1 = ({ children }) => {
       <Layout className="!bg-[#171717]">
         <Header className="!bg-[#171717] !leading-[16px] !py-0 !px-4 flex justify-between items-center">
           <Dropdown
-            value="physics"
+            value={selectedSubject}
             menu={{
               items: subject?.data?.map((item, i) => {
                 return {
@@ -54,6 +62,12 @@ const LayoutE1 = ({ children }) => {
                   ),
                   key: item.name,
                   value: item.name,
+                  onClick: (value) => {
+                    Cookies.set("subject", value.key);
+                    router.push("/chat");
+                    setSelectedSubject(value.key);
+                    setFetchData(true);
+                  },
                 };
               }),
             }}

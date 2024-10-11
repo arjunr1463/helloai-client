@@ -78,7 +78,7 @@ const Message = () => {
           }}
           placeholder="Message HelloAI"
           type="text"
-          className="!bg-[#171717] min-h-[55px] max-h-[55px] !font-monasans !tracking-wide !text-white"
+          className="custom !bg-[#171717] min-h-[55px] max-h-[55px] !font-monasans !tracking-wide !text-white"
           suffix={
             <button
               disabled={prompt === "" || newConversation?._id}

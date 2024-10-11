@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Footer } from "antd/es/layout/layout";
 import { Divider, Input, Tooltip } from "antd";
 import { Skeleton } from "antd";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 //service
 import ChatService from "@/services/chat";
@@ -27,10 +27,17 @@ const ChatList = () => {
 
   const [renameId, setRenameId] = useState("");
   const [renameValue, setRenameValue] = useState("");
+  const renameRef = useRef();
 
   //service
-  const { getChats, createChat, deleteChat } = ChatService();
+  const { getChats, createChat, deleteChat, renameChat } = ChatService();
   const { data, error, isLoading } = useSWR("/v1/chat/all", getChats);
+
+  useEffect(() => {
+    if (renameId !== "") {
+      renameRef.current.select();
+    }
+  }, [renameId]);
 
   return (
     <div className="flex flex-col gap-2 font-monasansMedium !text-white h-full w-full">
@@ -52,22 +59,36 @@ const ChatList = () => {
           {data?.map((chat, i) => (
             <div
               key={i}
-              onClick={() => {
+              onClick={async () => {
+                if (renameId !== "") {
+                  await renameChat(renameId, renameValue);
+                  setRenameValue("");
+                  setRenameId("");
+                }
                 router.push(`/chat/${chat._id}`);
               }}
-              className={`flex items-center items-center justify-between ${
+              className={`flex gap-2 items-center items-center justify-between ${
                 id === chat._id && "bg-[#171717]"
               } hover:bg-[#171717] cursor-pointer rounded-[5px] px-2 py-3`}
             >
               {renameId === chat._id ? (
                 <div className="flex h-full ">
                   <Input
+                    ref={renameRef}
+                    onChange={(e) => setRenameValue(e.target.value)}
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                     }}
+                    onKeyDown={async (e) => {
+                      if (e.key.toLowerCase() === "enter") {
+                        await renameChat(renameId, renameValue);
+                        setRenameValue("");
+                        setRenameId("");
+                      }
+                    }}
                     value={renameValue}
-                    className="min-h-[28px] max-h-[28px]"
+                    className="min-h-[28px] max-h-[28px] !text-black !font-monasans"
                   />
                 </div>
               ) : (

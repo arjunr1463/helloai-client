@@ -61,6 +61,7 @@ const ChatService = () => {
       const { data } = await axiosInstance.put("/v1/chat/rename", {
         chatId: id,
         name: name,
+        subject: params.subject,
       });
       if (data?.status) {
         mutate("/v1/chat/all");

@@ -49,12 +49,12 @@
 
 /* ANT-D */
 
-.ant-input {
+.custom .ant-input {
   color: white !important; 
   font-family: "monasans" !important;
 }
 
-.ant-input::placeholder {
+.custom .ant-input::placeholder {
   color: white !important; 
   font-family: "monasans" !important;
 }
