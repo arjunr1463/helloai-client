@@ -36,7 +36,7 @@ const Login = () => {
           Empowering Education with AI
         </h1>
         <h1 className="font-monasans tracking-wide">
-          Revolutionize learning and discovery with CollegeGPT, your intelligent
+          Revolutionize learning and discovery with HelloAI, your intelligent
           companion for academic exploration.
         </h1>
       </div>

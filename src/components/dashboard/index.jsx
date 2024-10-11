@@ -17,9 +17,9 @@ const Dashboard = () => {
   //state
   const [selectedSubject, setSelectedSubject] = useState("");
 
-  const { getService } = UserService();
+  const { getUserService } = UserService();
 
-  const { data } = useSWR("/v1/user", getService);
+  const { data } = useSWR("/v1/user", getUserService);
 
   const subjects = [
     {
@@ -36,7 +36,6 @@ const Dashboard = () => {
     },
   ];
 
-  console.log("Data", data);
 
   return (
     <div className="bg-[#171717] h-screen flex flex-col text-white">

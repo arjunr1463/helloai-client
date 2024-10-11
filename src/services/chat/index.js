@@ -38,9 +38,44 @@ const ChatService = () => {
       toast.error(error?.response?.data?.message);
     }
   };
+
+  const deleteChat = async (id) => {
+    try {
+      const { data } = await axiosInstance.delete("/v1/chat/delete", {
+        params: {
+          chatId: id,
+        },
+      });
+      if (data?.status) {
+        mutate("/v1/chat/all");
+        router.push(`/chat`);
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const renameChat = async (id, name) => {
+    try {
+      const { data } = await axiosInstance.put("/v1/chat/rename", {
+        chatId: id,
+        name: name,
+      });
+      if (data?.status) {
+        mutate("/v1/chat/all");
+        router.push(`/chat`);
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   return {
     getChats,
     createChat,
+    deleteChat,
+    renameChat,
   };
 };
 

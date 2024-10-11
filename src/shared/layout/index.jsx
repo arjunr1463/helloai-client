@@ -15,12 +15,13 @@ import UserService from "@/services/user";
 //assets
 import { IoMdArrowDropdown } from "react-icons/io";
 import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 const LayoutE1 = ({ children }) => {
   const { Header, Sider, Content, Footer } = Layout;
-  const { getService } = UserService();
-  const subject = Cookies.get("subject");
-  const { data } = useSWR("/v1/user", getService);
+  const { getUserService } = UserService();
+  const { data } = useSWR("/v1/user", getUserService);
+  const [selectedSubject, setSelectedSubject] = useState("");
 
   const items = [
     {
@@ -40,12 +41,16 @@ const LayoutE1 = ({ children }) => {
     },
   ];
 
+  useEffect(() => {
+    setSelectedSubject(Cookies.get("subject"));
+  }, []);
+
   return (
     <Layout className="h-screen w-full font-monasans">
-      <Sider className="!bg-[#232323]  !min-w-[16%] !max-w-[16%]">
+      <Sider className="!bg-[#232323] hidden xl:!flex !p-0 !m-0 !min-w-[250px] max-w-[250px]">
         <ChatList />
       </Sider>
-      <Layout className="!bg-[#171717]  w-full">
+      <Layout className="!bg-[#171717]">
         <Header className="!bg-[#171717] !leading-[16px] !py-0 !px-4 flex justify-between items-center">
           <Dropdown
             menu={{
@@ -56,7 +61,7 @@ const LayoutE1 = ({ children }) => {
           >
             <div className="flex items-center cursor-pointer">
               <span className="!leading-0 text-white font-monasansMedium capitalize">
-                {subject}
+                {selectedSubject}
               </span>
               <IoMdArrowDropdown className="text-white text-[20px]" />
             </div>
@@ -78,7 +83,7 @@ const LayoutE1 = ({ children }) => {
             />
           </Dropdown>
         </Header>
-        <Content className="!text-white font-monasans ">{children}</Content>
+        <Content className="!text-white font-monasans">{children}</Content>
         <Footer className="!bg-[#171717]">
           <Message />
         </Footer>
