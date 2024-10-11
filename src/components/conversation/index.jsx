@@ -101,6 +101,21 @@ const Conversation = () => {
         ref={conversationContainerRef}
         className="flex flex-col h-full gap-8 overflow-y-auto text-[15px] px-5 py-3"
       >
+        {data?.length === 0 && (
+         <div className="flex w-full h-full items-center justify-center text-[30px] tracking-wide !font-monasansMedium">
+         <div className="flex flex-col gap-3 items-center">
+           <Image
+             alt="hi"
+             src="/assets/hi.png"
+             width={60}
+             height={60}
+             className=""
+           />
+ 
+           <h1 className="tracking-widest">What can i help with?</h1>
+         </div>
+       </div>
+        )}
         {data
           ?.filter((conversation) => conversation?._id !== newConversation?._id)
           ?.map((conversation, i) => (

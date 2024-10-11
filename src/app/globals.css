@@ -21,19 +21,24 @@
 	src: url("/font/Mona-Sans-Bold.otf") format("truetype");
 }
 
+@font-face {
+	font-family: "monasansItalic";
+	src: url("/font/Mona-Sans-LightItalic.otf") format("truetype");
+}
+
 /* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
+  width: 12px !important; /* Width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
   background: #f0f0f0; /* Background of the track */
-  border-radius: 10px; /* Round the edges */
+  border-radius: 10px !important; /* Round the edges */
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #888; /* Color of the scroll thumb */
-  border-radius: 10px; /* Round the thumb edges */
+  border-radius: 10px !important; /* Round the thumb edges */
   border: 3px solid #f0f0f0; /* Space between thumb and track */
 }
 
@@ -41,11 +46,6 @@
   background-color: #555; /* Darker thumb when hovered */
 }
 
-/* For Firefox */
-* {
-  scrollbar-width: thin; /* Thin scrollbar */
-  scrollbar-color: #888 #f0f0f0; /* Thumb and track color */
-}
 
 /* ANT-D */
 
@@ -58,3 +58,12 @@
   color: white !important; 
   font-family: "monasans" !important;
 }
+
+.ant-skeleton .ant-skeleton-content .ant-skeleton-paragraph >li {
+  background-color: #333333 !important; 
+}
+
+.ant-skeleton .ant-skeleton-content .ant-skeleton-title{
+  background-color: #333333 !important; 
+}
+

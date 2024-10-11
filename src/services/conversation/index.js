@@ -6,6 +6,7 @@ import Cookie from "js-cookie";
 //lib
 import axiosInstance from "@/lib/axiosInstance";
 import { useParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ConversationService = () => {
   const { id } = useParams();
@@ -20,8 +21,7 @@ const ConversationService = () => {
       });
       return data.data;
     } catch (error) {
-      console.log("Error", error);
-      toast.error("something went wrong");
+      toast.error(error?.response?.data?.message);
     }
   };
   return {

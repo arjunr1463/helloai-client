@@ -8,6 +8,7 @@ module.exports = {
         monasansMedium: "monasansMedium",
         monasansSemibold: "monasansSemibold",
         monasansBold: "monasansBold",
+        monasansItalic:"monasansItalic"
       },
     },
   },
