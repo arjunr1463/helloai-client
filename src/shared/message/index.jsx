@@ -55,19 +55,24 @@ const Message = () => {
         }
       }
     } catch (error) {
-      toast.error("something went wrong");
+      toast.error(error?.response?.data?.message);
+      setResponseLoading(false);
     }
   };
   return (
-    <div className="w-full h-full pl-3 pr-6">
-      <div>
+    <div className="w-full h-full ">
+      <div className="">
         <Input
           onChange={(e) => {
             setPrompt(e.target.value);
           }}
           value={prompt}
           onKeyDown={async (e) => {
-            if (e.key.toLowerCase() === "enter") {
+            if (
+              e.key.toLowerCase() === "enter" &&
+              prompt !== "" &&
+              !newConversation?._id
+            ) {
               await handleSubmitPrompt();
             }
           }}

@@ -28,7 +28,7 @@
 
 /* Custom Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 12px !important; /* Width of the scrollbar */
+  width: 8px !important; /* Width of the scrollbar */
 }
 
 ::-webkit-scrollbar-track {
@@ -65,5 +65,28 @@
 
 .ant-skeleton .ant-skeleton-content .ant-skeleton-title{
   background-color: #333333 !important; 
+}
+
+.ant-dropdown .ant-dropdown-menu {
+  background-color: #232323 !important;
+  color: white !important;
+}
+
+.ant-dropdown-menu .ant-dropdown-menu-item-selected {
+  background-color: #171717 !important;
+}
+
+/* Add hover effect for each item */
+.ant-dropdown-menu .ant-dropdown-menu-item:hover {
+  background-color: #333333 !important; /* Change this color to your desired hover color */
+}
+.ant-dropdown-menu .ant-dropdown-menu-item-selected {
+  background-color: #171717 !important; /* Selected item background */
+}
+
+/* Add hover effect for each item */
+.ant-dropdown-menu .ant-dropdown-menu-item:hover,
+.ant-dropdown-menu .ant-dropdown-menu-item-selected:hover {
+  background-color: #333333 !important; /* Change this color to your desired hover color */
 }
 

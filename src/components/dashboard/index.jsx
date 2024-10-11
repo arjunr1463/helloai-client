@@ -5,37 +5,26 @@ import Cookie from "js-cookie";
 import Link from "next/link";
 import { useState } from "react";
 import { Header } from "antd/es/layout/layout";
+import Image from "next/image";
+import toast from "react-hot-toast";
+import useSWR from "swr";
+
+//services
+import UserService from "@/services/user";
 
 //assets
 import { FaArrowRightLong } from "react-icons/fa6";
-import useSWR from "swr";
-import UserService from "@/services/user";
-import Image from "next/image";
-import toast from "react-hot-toast";
+import SubjectService from "@/services/subject";
 
 const Dashboard = () => {
   //state
   const [selectedSubject, setSelectedSubject] = useState("");
 
   const { getUserService } = UserService();
+  const { getSubject } = SubjectService();
 
   const { data } = useSWR("/v1/user", getUserService);
-
-  const subjects = [
-    {
-      _id: 1,
-      name: "computer science",
-    },
-    {
-      _id: 2,
-      name: "physics",
-    },
-    {
-      _id: 3,
-      name: "biology",
-    },
-  ];
-
+  const subject = useSWR("/v1/subject", getSubject);
 
   return (
     <div className="bg-[#171717] h-screen flex flex-col text-white">
@@ -53,10 +42,10 @@ const Dashboard = () => {
           className="rounded-full"
         />
       </Header>
-      <div className="flex items-center py-6 px-4 h-full">
-        <div className=" flex flex-col gap-5  text-center items-center">
+      <div className="flex flex-col gap-6 xl:gap-0 xl:flex-row items-center py-6 px-4 h-full">
+        <div className="flex flex-col gap-5  text-center items-center">
           <div className="flex flex-col gap-3">
-            <h1 className="text-[35px] font-monasansBold tracking-widest">
+            <h1 className="text-[22px] xl:text-[32px] font-monasansBold tracking-widest">
               Explore the Future of Learning with AI-Powered Subjects
             </h1>
           </div>
@@ -71,18 +60,24 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col  items-center min-w-[50%] max-w-[50%]">
+        <div className="flex flex-col  items-center xl:min-w-[60%] xl:max-w-[60%]">
           <div className="flex flex-col gap-3">
-            <h3 className="text-[40px] font-monasansItalic">Manage Subjects</h3>
+            <h3 className="text-[25px] xl:text-[40px] font-monasansItalic">Manage Subjects</h3>
           </div>
           <div className=" flex justify-center w-full border-[white] py-6">
-            <div className="grid grid-cols-3 gap-x-4 ">
-              {subjects?.map((subject, i) => {
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 ">
+              {subject?.data?.map((subject, i) => {
                 return (
                   <div
                     key={i}
-                    onClick={() => setSelectedSubject(subject?.name)}
-                    className={`bg-[#17181c] text-[12px] font-monasans tracking-widest cursor-pointer border-[1px] border-[#353945] rounded-[10px] overflow-hidden shadow-lg transition-transform transform hover:scale-105 ${
+                    onClick={() => {
+                      if (selectedSubject === subject.name) {
+                        setSelectedSubject("");
+                      } else {
+                        setSelectedSubject(subject?.name);
+                      }
+                    }}
+                    className={`bg-[#17181c] text-[10px] md:text-[12px] font-monasans tracking-widest cursor-pointer border-[1px] border-[#353945] rounded-[10px] overflow-hidden shadow-lg transition-transform transform hover:scale-105 ${
                       selectedSubject === subject.name &&
                       "border-[#6c8afd] !shadow-[0_4px_15px_rgba(108,138,253,0.5)]"
                     }`}
@@ -103,7 +98,7 @@ const Dashboard = () => {
                       className="h-[80px] relative shadow-[0_2px_10px_rgba(0,0,0,0.15)]"
                     ></div>
                     <div className="px-2 py-3 text-center">
-                      <span className="capitalize font-semibold">
+                      <span className=" capitalize font-semibold">
                         {subject.name}
                       </span>
                     </div>

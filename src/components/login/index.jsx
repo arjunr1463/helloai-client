@@ -30,12 +30,12 @@ const Login = () => {
     }
   };
   return (
-    <div className="bg-[#171717] text-white h-screen flex flex-col gap-6 items-center justify-center">
+    <div className="bg-[#171717] text-white h-screen flex flex-col gap-8 xl:gap-6 items-center justify-center">
       <div className="flex flex-col text-center">
-        <h1 className="text-[55px] font-monasansSemibold tracking-wider">
+        <h1 className="text-[32px] xl:text-[55px] font-monasansSemibold tracking-wider">
           Empowering Education with AI
         </h1>
-        <h1 className="font-monasans tracking-wide">
+        <h1 className="font-monasans tracking-wide hidden xl:flex xl:text-[16px]">
           Revolutionize learning and discovery with HelloAI, your intelligent
           companion for academic exploration.
         </h1>

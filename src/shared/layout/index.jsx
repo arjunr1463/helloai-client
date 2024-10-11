@@ -3,6 +3,9 @@
 //module
 import { Dropdown, Layout } from "antd";
 import useSWR from "swr";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 //components
 import ChatList from "../chatList";
@@ -11,35 +14,22 @@ import Message from "../message";
 //context
 import Image from "next/image";
 import UserService from "@/services/user";
+import SubjectService from "@/services/subject";
 
 //assets
 import { IoMdArrowDropdown } from "react-icons/io";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
 
 const LayoutE1 = ({ children }) => {
   const { Header, Sider, Content, Footer } = Layout;
-  const { getUserService } = UserService();
-  const { data } = useSWR("/v1/user", getUserService);
+  const router = useRouter();
   const [selectedSubject, setSelectedSubject] = useState("");
 
-  const items = [
-    {
-      label: <a href="https://www.antgroup.com">1st menu item</a>,
-      key: "0",
-    },
-    {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
-      key: "1",
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
-    },
-  ];
+  //service
+  const { getUserService } = UserService();
+  const { getSubject } = SubjectService();
+
+  const { data } = useSWR("/v1/user", getUserService);
+  const subject = useSWR("/v1/subject", getSubject);
 
   useEffect(() => {
     setSelectedSubject(Cookies.get("subject"));
@@ -53,11 +43,22 @@ const LayoutE1 = ({ children }) => {
       <Layout className="!bg-[#171717]">
         <Header className="!bg-[#171717] !leading-[16px] !py-0 !px-4 flex justify-between items-center">
           <Dropdown
+            value="physics"
             menu={{
-              items,
+              items: subject?.data?.map((item, i) => {
+                return {
+                  label: (
+                    <span className="capitalize !font-monasans text-white">
+                      {item.name}
+                    </span>
+                  ),
+                  key: item.name,
+                  value: item.name,
+                };
+              }),
             }}
             trigger={["click"]}
-            className=" !leading-0"
+            className=" !leading-0 hidden xl:flex"
           >
             <div className="flex items-center cursor-pointer">
               <span className="!leading-0 text-white font-monasansMedium capitalize">
@@ -69,7 +70,23 @@ const LayoutE1 = ({ children }) => {
 
           <Dropdown
             menu={{
-              items,
+              items: [
+                {
+                  label: (
+                    <span
+                      onClick={() => {
+                        Cookies.remove("subject");
+                        Cookies.remove("token");
+                        router.push("/");
+                      }}
+                      className="text-white !font-monasans"
+                    >
+                      Logout
+                    </span>
+                  ),
+                  key: 1,
+                },
+              ],
             }}
             trigger={["click"]}
             className=" !leading-0"
@@ -84,7 +101,7 @@ const LayoutE1 = ({ children }) => {
           </Dropdown>
         </Header>
         <Content className="!text-white font-monasans">{children}</Content>
-        <Footer className="!bg-[#171717]">
+        <Footer className="!bg-[#171717] !p-2 xl:!py-8 xl:!px-16">
           <Message />
         </Footer>
       </Layout>

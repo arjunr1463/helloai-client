@@ -90,11 +90,11 @@ const ChatList = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    if (renameId === "") {
+                    if (renameId === chat._id) {
+                      setRenameId("");
+                    } else {
                       setRenameId(chat._id);
                       setRenameValue(chat.name);
-                    } else {
-                      setRenameId("");
                     }
                   }}
                   className="text-gray-500 transition-all duration-300 transform hover:text-blue-500 hover:scale-110 active:scale-90"

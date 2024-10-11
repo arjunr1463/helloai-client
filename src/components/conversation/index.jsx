@@ -99,7 +99,7 @@ const Conversation = () => {
     <LayoutE1>
       <div
         ref={conversationContainerRef}
-        className="flex flex-col h-full gap-8 overflow-y-auto text-[15px] px-5 py-3"
+        className="flex flex-col h-full gap-8 overflow-y-auto text-[13px] xl:text-[15px] px-2 py-2 xl:px-5 xl:py-3"
       >
         {data?.length === 0 && !responseLoading && (
           <div className="flex w-full h-full items-center justify-center text-[30px] tracking-wide !font-monasansMedium">
@@ -122,10 +122,10 @@ const Conversation = () => {
             <div key={i} className="flex flex-col gap-3">
               <div
                 className={`${
-                  conversation?.prompt && "flex gap-3 justify-end "
-                } pl-[100px]`}
+                  conversation?.prompt && "flex gap-2 xl:gap-3 justify-end "
+                } xl:pl-[100px]`}
               >
-                <span className="bg-[#6c8afd] shadow-md p-3 rounded-full leading-[30px] tracking-wide">
+                <span className="bg-[#6c8afd] shadow-md px-2 py-1 xl:p-3 rounded-full leading-[30px] tracking-wide">
                   {conversation.prompt}
                 </span>
                 <Image
@@ -133,18 +133,18 @@ const Conversation = () => {
                   src="/assets/user.svg"
                   width={35}
                   height={35}
-                  className="max-h-[35px] min-h-[35px] min-w-[35px] max-w-[35px]"
+                  className="max-h-[25px] min-h-[25px] min-w-[25px] max-w-[25px] xl:max-h-[35px] xl:min-h-[35px] xl:min-w-[35px] xl:max-w-[35px]"
                 />
               </div>
-              <div className="flex gap-3 pr-[100px]">
+              <div className="flex gap-2 xl:gap-3 xl:pr-[100px]">
                 <Image
                   alt="chatbot"
                   src="/assets/chat-bot.png"
                   width={35}
                   height={35}
-                  className="max-h-[35px] min-h-[35px] min-w-[35px] max-w-[35px]"
+                  className="max-h-[25px] min-h-[25px] min-w-[25px] max-w-[25px] xl:max-h-[35px] xl:min-h-[35px] xl:min-w-[35px] xl:max-w-[35px]"
                 />
-                <span className="leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-3 rounded-[8px]">
+                <span className="leading-[25px] xl:leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-2 xl:p-3 rounded-[8px]">
                   <ReactMarkdown>{conversation.response}</ReactMarkdown>
                 </span>
               </div>
