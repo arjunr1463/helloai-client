@@ -1,7 +1,7 @@
 "use client";
 
 //module
-import { Dropdown, Layout } from "antd";
+import { Drawer, Dropdown, Layout } from "antd";
 import useSWR, { mutate } from "swr";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -18,12 +18,15 @@ import SubjectService from "@/services/subject";
 
 //assets
 import { IoMdArrowDropdown } from "react-icons/io";
+import { RiMenu3Fill } from "react-icons/ri";
+import DrawerComponent from "../drawer";
 
 const LayoutE1 = ({ children }) => {
   const { Header, Sider, Content, Footer } = Layout;
   const router = useRouter();
   const [selectedSubject, setSelectedSubject] = useState("");
   const [fetchData, setFetchData] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   //service
   const { getUserService } = UserService();
@@ -58,9 +61,10 @@ const LayoutE1 = ({ children }) => {
 
   return (
     <Layout
-      className=" w-full font-monasans"
+      className=" w-full font-monasans relative"
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
+      <DrawerComponent openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <Sider className="!bg-[#232323] hidden xl:!flex !p-0 !m-0 !min-w-[250px] max-w-[250px]">
         <ChatList />
       </Sider>
@@ -97,7 +101,12 @@ const LayoutE1 = ({ children }) => {
               <IoMdArrowDropdown className="text-white text-[20px]" />
             </div>
           </Dropdown>
-
+          <RiMenu3Fill
+            onClick={() => {
+              setOpenDrawer(!openDrawer);
+            }}
+            className="text-white text-[25px] xl:hidden "
+          />
           <Dropdown
             menu={{
               items: [
@@ -130,6 +139,7 @@ const LayoutE1 = ({ children }) => {
             />
           </Dropdown>
         </Header>
+
         <Content className="!text-white font-monasans">{children}</Content>
         <Footer className="!bg-[#171717] !p-2 !pb-5 xl:!py-8 xl:!px-16">
           <Message />
