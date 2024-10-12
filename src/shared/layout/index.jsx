@@ -43,8 +43,24 @@ const LayoutE1 = ({ children }) => {
     }
   }, [fetchData]);
 
+  useEffect(() => {
+    const setVh = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVh();
+
+    window.addEventListener("resize", setVh);
+
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   return (
-    <Layout className="h-screen w-full font-monasans">
+    <Layout
+      className=" w-full font-monasans"
+      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
+    >
       <Sider className="!bg-[#232323] hidden xl:!flex !p-0 !m-0 !min-w-[250px] max-w-[250px]">
         <ChatList />
       </Sider>

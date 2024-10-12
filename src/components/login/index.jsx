@@ -47,7 +47,7 @@ const Login = () => {
   return (
     <div
       className="bg-[#171717] text-white flex flex-col gap-8 xl:gap-6 items-center justify-center"
-      style={{ height: "calc(var(--vh, 1vh) * 100)" }} // Use the dynamically calculated height here
+      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
       <div className="flex flex-col text-center">
         <h1 className="text-[32px] xl:text-[55px] font-monasansSemibold tracking-wider">

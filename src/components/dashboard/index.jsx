@@ -3,7 +3,7 @@
 //module
 import Cookie from "js-cookie";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "antd/es/layout/layout";
 import Image from "next/image";
 import toast from "react-hot-toast";
@@ -26,8 +26,24 @@ const Dashboard = () => {
   const { data } = useSWR("/v1/user", getUserService);
   const subject = useSWR("/v1/subject", getSubject);
 
+  useEffect(() => {
+    const setVh = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVh();
+
+    window.addEventListener("resize", setVh);
+
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   return (
-    <div className="bg-[#171717] h-screen flex flex-col text-white">
+    <div
+      className="bg-[#171717] flex flex-col text-white"
+      style={{ height: "calc(var(--vh, 1vh) * 100)" }}
+    >
       <Header className="!bg-[#171717] !px-4 flex items-center justify-between !text-white">
         <div className="flex items-center gap-3">
           <span className="font-monasansSemibold tracking-[10px] text-[18px]">
@@ -62,7 +78,9 @@ const Dashboard = () => {
         </div>
         <div className="flex flex-col  items-center xl:min-w-[60%] xl:max-w-[60%]">
           <div className="flex flex-col gap-3">
-            <h3 className="text-[25px] xl:text-[40px] font-monasansItalic">Manage Subjects</h3>
+            <h3 className="text-[25px] xl:text-[40px] font-monasansItalic">
+              Manage Subjects
+            </h3>
           </div>
           <div className=" flex justify-center w-full border-[white] py-6">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 ">
