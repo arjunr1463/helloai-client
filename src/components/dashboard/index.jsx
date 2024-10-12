@@ -47,7 +47,7 @@ const Dashboard = () => {
     >
       <Header className="!bg-[#171717] !px-4 flex items-center justify-between !text-white">
         <div className="flex items-center gap-3">
-          <span className="font-monasansSemibold tracking-[10px] text-[18px]">
+          <span className="font-monasansSemibold tracking-[4px] xl:tracking-[10px] text-[18px]">
             HELLO<span className="text-[#6c8afd] font-monasansBold">AI</span>
           </span>
         </div>
@@ -59,9 +59,9 @@ const Dashboard = () => {
           className="rounded-full"
         />
       </Header>
-      <div className="flex flex-col w-full gap-12 xl:gap-0 xl:flex-row items-center py-6 px-4 h-full">
+      <div className="flex flex-col w-full gap-12 xl:gap-0 xl:flex-row items-center justify-center xl:py-6 xl:px-4 h-full">
         <div className="flex flex-col gap-5  text-center items-center">
-          <h1 className="text-[16px] xl:text-[32px]  font-monasansBold tracking-widest">
+          <h1 className="text-[20px] xl:text-[32px]  font-monasansSemibold tracking-widest">
             Explore the Future of Learning with AI-Powered Subjects
           </h1>
           <div className="rounded-[12px] overflow-hidden w-full custom-shadow">

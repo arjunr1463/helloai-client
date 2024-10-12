@@ -112,7 +112,9 @@ const Conversation = () => {
                 className=""
               />
 
-              <h1 className="tracking-widest">What can i help with?</h1>
+              <h1 className="tracking-widest text-center">
+                What can i help with?
+              </h1>
             </div>
           </div>
         )}
