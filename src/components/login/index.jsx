@@ -6,12 +6,26 @@ import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 //lib
 import axiosInstance from "@/lib/axiosInstance";
 
 const Login = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const setVh = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setVh();
+
+    window.addEventListener('resize', setVh);
+
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
 
   const handleLogin = async (credentialResponse) => {
     try {
@@ -29,8 +43,12 @@ const Login = () => {
       toast.error("something went wrong");
     }
   };
+
   return (
-    <div className="bg-[#171717] text-white h-screen flex flex-col gap-8 xl:gap-6 items-center justify-center">
+    <div
+      className="bg-[#171717] text-white flex flex-col gap-8 xl:gap-6 items-center justify-center"
+      style={{ height: "calc(var(--vh, 1vh) * 100)" }} // Use the dynamically calculated height here
+    >
       <div className="flex flex-col text-center">
         <h1 className="text-[32px] xl:text-[55px] font-monasansSemibold tracking-wider">
           Empowering Education with AI
@@ -41,9 +59,7 @@ const Login = () => {
         </h1>
       </div>
       <div>
-        <GoogleOAuthProvider
-          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-        >
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
           <GoogleLogin
             onSuccess={handleLogin}
             onError={() => toast.error("login failed! Something went wrong")}
