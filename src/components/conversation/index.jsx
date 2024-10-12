@@ -178,7 +178,7 @@ const Conversation = () => {
                 className="max-h-[25px] min-h-[25px] min-w-[25px] max-w-[25px] xl:max-h-[35px] xl:min-h-[35px] xl:min-w-[35px] xl:max-w-[35px]"
               />
               <span className="leading-[25px] xl:leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-2 xl:p-3 rounded-[8px]">
-                <ReactMarkdown>{newConversation.response}</ReactMarkdown>
+                <ReactMarkdown>{animatedResponse}</ReactMarkdown>
               </span>
             </div>
           </div>
