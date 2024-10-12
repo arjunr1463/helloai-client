@@ -1,0 +1,14 @@
+
+.slick-slide {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    }
+    .slick-next:before{
+        display: none !important;
+      }
+    
+      .slick-prev:before{
+        display: none !important;
+      }
+    

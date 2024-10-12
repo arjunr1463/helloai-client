@@ -131,7 +131,7 @@ const LayoutE1 = ({ children }) => {
           </Dropdown>
         </Header>
         <Content className="!text-white font-monasans">{children}</Content>
-        <Footer className="!bg-[#171717] !p-2 xl:!py-8 xl:!px-16">
+        <Footer className="!bg-[#171717] !p-2 !pb-5 xl:!py-8 xl:!px-16">
           <Message />
         </Footer>
       </Layout>
