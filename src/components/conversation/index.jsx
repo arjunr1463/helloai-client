@@ -155,30 +155,30 @@ const Conversation = () => {
           <div className="flex flex-col gap-3">
             <div
               className={`${
-                newConversation?.prompt && "flex gap-3 justify-end "
-              } pl-[100px]`}
+                newConversation?.prompt && "flex gap-2 xl:gap-3 justify-end "
+              } xl:pl-[100px]`}
             >
-              <span className="bg-[#6c8afd] shadow-md p-3 rounded-full leading-[30px] tracking-wide">
-                {newConversation?.prompt}
+              <span className="bg-[#6c8afd] shadow-md px-2 py-1 xl:p-3 rounded-full leading-[30px] tracking-wide">
+                {newConversation.prompt}
               </span>
               <Image
                 alt="chatbot"
                 src="/assets/user.svg"
                 width={35}
                 height={35}
-                className="max-h-[35px] min-h-[35px] min-w-[35px] max-w-[35px]"
+                className="max-h-[25px] min-h-[25px] min-w-[25px] max-w-[25px] xl:max-h-[35px] xl:min-h-[35px] xl:min-w-[35px] xl:max-w-[35px]"
               />
             </div>
-            <div className="flex gap-3 pr-[100px]">
+            <div className="flex gap-2 xl:gap-3 xl:pr-[100px]">
               <Image
                 alt="chatbot"
                 src="/assets/chat-bot.png"
                 width={35}
                 height={35}
-                className="max-h-[35px] min-h-[35px] min-w-[35px] max-w-[35px]"
+                className="max-h-[25px] min-h-[25px] min-w-[25px] max-w-[25px] xl:max-h-[35px] xl:min-h-[35px] xl:min-w-[35px] xl:max-w-[35px]"
               />
-              <span className="leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-3 rounded-[8px]">
-                <ReactMarkdown>{animatedResponse}</ReactMarkdown>
+              <span className="leading-[25px] xl:leading-[35px] shadow-md tracking-wider bg-[#2e333d] p-2 xl:p-3 rounded-[8px]">
+                <ReactMarkdown>{newConversation.response}</ReactMarkdown>
               </span>
             </div>
           </div>
