@@ -8,17 +8,22 @@ import { Header } from "antd/es/layout/layout";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import useSWR from "swr";
+import { Skeleton, Dropdown } from "antd";
+import SubjectService from "@/services/subject";
 
 //services
 import UserService from "@/services/user";
 
+//shared
+import Carousel from "@/shared/carousel";
+
 //assets
 import { FaArrowRightLong } from "react-icons/fa6";
-import SubjectService from "@/services/subject";
-import Carousel from "@/shared/carousel";
-import { Skeleton } from "antd";
+import { BiLogOut } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const router = useRouter();
   //state
   const [selectedSubject, setSelectedSubject] = useState("");
 
@@ -52,13 +57,38 @@ const Dashboard = () => {
             HELLO<span className="text-[#6c8afd] font-monasansBold">AI</span>
           </span>
         </div>
-        <Image
-          src={data?.profile_picture}
-          alt="profile"
-          width={30}
-          height={30}
-          className="rounded-full"
-        />
+        <Dropdown
+          menu={{
+            items: [
+              {
+                label: (
+                  <div
+                    className="text-white !font-monasans flex items-center gap-2"
+                    onClick={() => {
+                      Cookie.remove("subject");
+                      Cookie.remove("token");
+                      router.push("/");
+                    }}
+                  >
+                    <BiLogOut className="text-[16px]" />
+                    <span>Logout</span>
+                  </div>
+                ),
+                key: 1,
+              },
+            ],
+          }}
+          trigger={["click"]}
+          className=" !leading-0"
+        >
+          <Image
+            alt="profile"
+            src={data?.profile_picture}
+            width={30}
+            height={30}
+            className="rounded-full cursor-pointer"
+          />
+        </Dropdown>
       </Header>
       <div className="flex flex-col h-full w-full gap-12  md:gap-0 xl:flex-row items-center justify-center overflow-hidden px-3 xl:py-6 xl:px-4 h-full">
         <div className="flex flex-col gap-5  text-center items-center">
