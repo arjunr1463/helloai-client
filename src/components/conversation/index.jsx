@@ -127,7 +127,7 @@ const Conversation = () => {
                   conversation?.prompt && "flex gap-2 xl:gap-3 justify-end "
                 } xl:pl-[100px]`}
               >
-                <span className="bg-[#6c8afd] shadow-md px-2 py-1 xl:p-3 rounded-full leading-[30px] tracking-wide">
+                <span className="bg-[#6c8afd] shadow-md px-4 md:px-2 py-1 xl:p-3 rounded-full leading-[25px] md:leading-[30px] tracking-wide">
                   {conversation.prompt}
                 </span>
                 <Image
@@ -160,7 +160,7 @@ const Conversation = () => {
                 newConversation?.prompt && "flex gap-2 xl:gap-3 justify-end "
               } xl:pl-[100px]`}
             >
-              <span className="bg-[#6c8afd] shadow-md px-2 py-1 xl:p-3 rounded-full leading-[30px] tracking-wide">
+              <span className="bg-[#6c8afd] shadow-md px-4 py-1 xl:p-3 rounded-full leading-[25px] md:leading-[30px] tracking-wide">
                 {newConversation.prompt}
               </span>
               <Image
