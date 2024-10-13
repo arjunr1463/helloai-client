@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 //components
 import ChatList from "../chatList";
 import Message from "../message";
+import DrawerComponent from "../drawer";
 
 //context
 import Image from "next/image";
@@ -19,7 +20,8 @@ import SubjectService from "@/services/subject";
 //assets
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiMenu3Fill } from "react-icons/ri";
-import DrawerComponent from "../drawer";
+import { BiLogOut } from "react-icons/bi";
+import { AiOutlineRollback } from "react-icons/ai";
 
 const LayoutE1 = ({ children }) => {
   const { Header, Sider, Content, Footer } = Layout;
@@ -27,6 +29,7 @@ const LayoutE1 = ({ children }) => {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [fetchData, setFetchData] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [initialDrawer, setInitialDrawer] = useState(false);
 
   //service
   const { getUserService } = UserService();
@@ -64,7 +67,11 @@ const LayoutE1 = ({ children }) => {
       className=" w-full font-monasans relative"
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
-      <DrawerComponent openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <DrawerComponent
+        openDrawer={openDrawer && initialDrawer}
+        initialDrawer={initialDrawer}
+        setOpenDrawer={setOpenDrawer}
+      />
       <Sider className="!bg-[#232323] hidden xl:!flex !p-0 !m-0 !min-w-[250px] max-w-[250px]">
         <ChatList />
       </Sider>
@@ -104,6 +111,7 @@ const LayoutE1 = ({ children }) => {
           <RiMenu3Fill
             onClick={() => {
               setOpenDrawer(!openDrawer);
+              setInitialDrawer(true);
             }}
             className="text-white text-[25px] xl:hidden "
           />
@@ -112,18 +120,33 @@ const LayoutE1 = ({ children }) => {
               items: [
                 {
                   label: (
-                    <span
+                    <div
+                      className="text-white !font-monasans flex items-center gap-2"
+                      onClick={() => {
+                        router.push("/dashboard");
+                      }}
+                    >
+                      <AiOutlineRollback className="text-[16px]" />
+                      <span>Back</span>
+                    </div>
+                  ),
+                  key: 1,
+                },
+                {
+                  label: (
+                    <div
+                      className="text-white !font-monasans flex items-center gap-2"
                       onClick={() => {
                         Cookies.remove("subject");
                         Cookies.remove("token");
                         router.push("/");
                       }}
-                      className="text-white !font-monasans"
                     >
-                      Logout
-                    </span>
+                      <BiLogOut className="text-[16px]" />
+                      <span>Logout</span>
+                    </div>
                   ),
-                  key: 1,
+                  key: 2,
                 },
               ],
             }}

@@ -16,6 +16,7 @@ import UserService from "@/services/user";
 import { FaArrowRightLong } from "react-icons/fa6";
 import SubjectService from "@/services/subject";
 import Carousel from "@/shared/carousel";
+import { Skeleton } from "antd";
 
 const Dashboard = () => {
   //state
@@ -59,7 +60,7 @@ const Dashboard = () => {
           className="rounded-full"
         />
       </Header>
-      <div className="flex flex-col w-full gap-12 xl:gap-0 xl:flex-row items-center justify-center xl:py-6 xl:px-4 h-full">
+      <div className="flex flex-col h-full w-full gap-12 xl:gap-0 xl:flex-row items-center justify-center overflow-hidden px-3 xl:py-6 xl:px-4 h-full">
         <div className="flex flex-col gap-5  text-center items-center">
           <h1 className="text-[20px] xl:text-[32px]  font-monasansSemibold tracking-widest">
             Explore the Future of Learning with AI-Powered Subjects
@@ -81,12 +82,22 @@ const Dashboard = () => {
               Manage Subjects
             </h3>
           </div>
-
-          <Carousel
-            subject={subject}
-            selectedSubject={selectedSubject}
-            setSelectedSubject={setSelectedSubject}
-          />
+          {subject.isLoading ? (
+            <div className="flex gap-3 px-3 py-3">
+              <Skeleton.Node active={true} className=" !bg-[#232323] " />
+              <Skeleton.Node active={true} className=" !bg-[#232323]" />
+              <Skeleton.Node
+                active={true}
+                className="!hidden xl:!flex !bg-[#232323]"
+              />
+            </div>
+          ) : (
+            <Carousel
+              subject={subject}
+              selectedSubject={selectedSubject}
+              setSelectedSubject={setSelectedSubject}
+            />
+          )}
 
           <div className="flex justify-center pt-6">
             <Link href={selectedSubject === "" ? "/dashboard" : "/chat"}>

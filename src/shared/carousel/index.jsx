@@ -77,7 +77,7 @@ const Carousel = ({ subject, selectedSubject, setSelectedSubject }) => {
   };
 
   return (
-    <Slider {...settings} className="flex py-3 w-[90%] xl:w-[60%] !p-0 !m-0">
+    <Slider {...settings} className="flex py-3  w-[90%] xl:w-[60%] !p-0 !m-0">
       {subject?.data?.map((subject, i) => (
         <div
           key={i}
