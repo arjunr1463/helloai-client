@@ -64,7 +64,7 @@ const Carousel = ({ subject, selectedSubject, setSelectedSubject }) => {
       {
         breakpoint: 1024, // For screens <1024px
         settings: {
-          slidesToShow: 2, // Display 2 slides for screens smaller than 1024px
+          slidesToShow: 3, // Display 2 slides for screens smaller than 1024px
         },
       },
       {

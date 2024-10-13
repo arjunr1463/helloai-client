@@ -60,9 +60,9 @@ const Dashboard = () => {
           className="rounded-full"
         />
       </Header>
-      <div className="flex flex-col h-full w-full gap-12 xl:gap-0 xl:flex-row items-center justify-center overflow-hidden px-3 xl:py-6 xl:px-4 h-full">
+      <div className="flex flex-col h-full w-full gap-12  md:gap-0 xl:flex-row items-center justify-center overflow-hidden px-3 xl:py-6 xl:px-4 h-full">
         <div className="flex flex-col gap-5  text-center items-center">
-          <h1 className="text-[20px] xl:text-[32px]  font-monasansSemibold tracking-widest">
+          <h1 className="text-[20px] md:text-[25px] xl:text-[32px]  font-monasansSemibold tracking-widest">
             Explore the Future of Learning with AI-Powered Subjects
           </h1>
           <div className="rounded-[12px] overflow-hidden w-full custom-shadow">
